@@ -41,7 +41,7 @@ since: 2016
 
 subnav:
   Email: "mailto:qingbo.song@gmail.com"
-  新浪微博: "sina weibo"
+  新浪微博: "http://weibo.com/swzty"
   GitHub: "https://github.com/swht"
   V2EX: "http://www.v2ex.com/member/swht"
   RSS: "/atom.xml"
@@ -156,7 +156,7 @@ copyright: true
 # Table of contents | 文章目录
 toc:
   on: true
-  list_number: true # 目录序号
+  list_number: false # 目录序号
   max_depth: 3  # 1 - 6 (h1-h6) 目录最大级数
   nowrap: false # Keep title on same line | 目录标题不换行
 
