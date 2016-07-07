@@ -72,3 +72,6 @@ deploy:
   type: git
   repo: https://github.com/swht/swht.github.io.git
   branch: master
+  message: Site updated:{{ now('YYYY-MM-DD HH:mm:ss') }}
+  name: swht
+  email: qingbo.song@gmail.com
