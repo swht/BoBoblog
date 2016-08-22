@@ -1,9 +1,9 @@
 ---
 title: '2016/08/22 [nodejs开发书籍]深入浅出Node.js.pdf'
 date: 2016-08-22 09:47:18
-tags:nodejs开发书籍
+tags: nodejs开发书籍
 ---
-Author:@南非波波
+Author: @南非波波
 
 [深入浅出Node.js](http://blog.songqingbo.cn/pdf/nodejs/深入浅出Node.js.pdf "深入浅出Node.js.pdf")
 
