@@ -28,7 +28,7 @@
 
 	deploy:
 	  type: git
-	  repo: https://github.com/swht/swht.github.io.git
+	  repo: git@github.com:swht/swht.github.io.git
 	  branch: master
 	  message: Site updated:{{ now('YYYY-MM-DD HH:mm:ss') }}
 	  name: swht
@@ -82,4 +82,29 @@
 	---
 	Author:@南非波波
 
-存放路径source/_posts,建议使用hexo new "postName"创建新的文章
+###文章存放路径
+
+	存放路径source/_posts,建议使用hexo new "postName"创建新的文章
+
+
+###问题
+
+	在配置deploy的过程中可能会遇到问题，
+	首先使用https://gihub.com/swht/swht.github.io.git的方式提交的会遇到无效的信息格式的提示；
+	看到网上会有很多朋友推荐使用git@github.com:swht/swht.github.io.git的方式
+	使用git协议的必须进行配置ssh-key：
+
+		使用git Bash工具打开：
+			cd ~/.ssh/
+			ssh-keygen -t rsa -C "qingbo.song@gmail.com"
+			#默认回车，不设置密码
+			#在~/.ssh/会产生两个文件 id_rsa   id_rsa.pub
+			#复制id_rsa.pub文件中的内容，即公钥
+			#在github上创建ssh keys，将上述公钥粘贴进去
+			#配置账户
+			git config --global user.name "swht"
+			git config --global user.email "qingbo.song@gmail.com"			
+			#测试是否配置成功
+			ssh -T git@github.com
+
+详细说明请参考：[github免密钥配置](http://jingyan.baidu.com/article/a65957f4e91ccf24e77f9b11.html "github免密钥配置")

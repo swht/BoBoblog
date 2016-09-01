@@ -70,7 +70,7 @@ theme: hexo-theme-yelee-master
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/swht/swht.github.io.git
+  repo: git@github.com:swht/swht.github.io.git
   branch: master
   message: Site updated:{{ now('YYYY-MM-DD HH:mm:ss') }}
   name: swht
