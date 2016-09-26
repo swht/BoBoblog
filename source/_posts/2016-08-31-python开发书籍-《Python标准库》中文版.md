@@ -5,4 +5,4 @@ tags: python开发书籍
 ---
 Author:@南非波波
 
-[Python核心编程[第三版]英文版](http://blog.songqingbo.cn/pdf/nodejs/Python核心编程[第三版]英文版.pdf "Python核心编程[第三版]英文版.pdf")
+[Python核心编程[第三版]英文版](http://blog.songqingbo.cn/pdf/python/Python核心编程[第三版]英文版.pdf "Python核心编程[第三版]英文版.pdf")

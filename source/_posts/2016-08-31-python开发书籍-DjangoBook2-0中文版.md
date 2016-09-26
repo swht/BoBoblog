@@ -5,4 +5,4 @@ tags: python开发书籍
 ---
 Author:@南非波波
 
-[DjangoBook2-0中文版](http://blog.songqingbo.cn/pdf/nodejs/DjangoBook2-0中文版.pdf "DjangoBook2-0中文版.pdf")
+[DjangoBook2-0中文版](http://blog.songqingbo.cn/pdf/python/DjangoBook2-0中文版.pdf "DjangoBook2-0中文版.pdf")

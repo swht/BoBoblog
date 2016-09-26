@@ -5,4 +5,4 @@ tags: python开发书籍
 ---
 Author:@南非波波
 
-[Django Web开发指南.pdf](http://blog.songqingbo.cn/pdf/nodejs/DjangoWeb开发指南.pdf "Django Web开发指南.pdf")
+[Django Web开发指南.pdf](http://blog.songqingbo.cn/pdf/python/DjangoWeb开发指南.pdf "Django Web开发指南.pdf")

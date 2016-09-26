@@ -5,4 +5,4 @@ tags: python开发书籍
 ---
 Author:@南非波波
 
-[《Python标准库》中文版](http://blog.songqingbo.cn/pdf/nodejs/《Python标准库》中文版.pdf "《Python标准库》中文版.pdf")
+[《Python标准库》中文版](http://blog.songqingbo.cn/pdf/python/《Python标准库》中文版.pdf "《Python标准库》中文版.pdf")

@@ -5,4 +5,4 @@ tags: python开发书籍
 ---
 Author:@南非波波
 
-[Python 入门指南3.5.1 中文](http://blog.songqingbo.cn/pdf/nodejs/Python入门指南3.5.1中文.chm "Python入门指南3.5.1中文.chm")
+[Python 入门指南3.5.1 中文](http://blog.songqingbo.cn/pdf/python/Python入门指南3.5.1中文.chm "Python入门指南3.5.1中文.chm")
