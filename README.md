@@ -107,4 +107,13 @@
 			#测试是否配置成功
 			ssh -T git@github.com
 
+	附录个人_config.yml文件deploy部分的配置:
+		deploy:
+		  type: git
+		  repo: git@github.com:swht/swht.github.io.git
+		  branch: master
+		  message: Site updated:{{ now('YYYY-MM-DD HH:mm:ss') }}
+		  name: swht
+		  email: qingbo.song@gmail.com
+
 详细说明请参考：[github免密钥配置](http://jingyan.baidu.com/article/a65957f4e91ccf24e77f9b11.html "github免密钥配置")
