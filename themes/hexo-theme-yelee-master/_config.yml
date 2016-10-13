@@ -48,7 +48,7 @@ subnav:
   知乎: "https://www.zhihu.com/people/nanfeibobo"
   豆瓣: "https://www.douban.com/people/swht/"
   简书: "http://www.jianshu.com/users/247fb1ce1573/timeline"
-  SegmentFault: "https://segmentfault.com/u/swht"
+  #SegmentFault: "https://segmentfault.com/u/swht"
   博客园: "http://www.cnblogs.com/songqingbo"
   #CSDN: ""
   #Coding: ""
