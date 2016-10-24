@@ -61,3 +61,48 @@ Author:@南非波波
 	创建应用数需要从另一张表中(cad_app_user)进行统计查询形成新表与TB_Enterprise_User进行表关联。
 	这里需要注意loginTime、ct记录的是毫秒值，而UNIX_TIMESTAMP('2016-07-11 00:00:00')转换的记录值是秒
 	
+二、获取过去一周新增loader用户的信息
+
+	查询指定时间增加loader用户的信息：
+		1.统计服务器每天新增文件total_day/new.txt获取appId
+			awk -F "|" '{print $1}' 20161023 |sort -k 1 -n -r|uniq -c|awk -F " " '{print $2}' >> test.txt （多天就执行多条，把文件名换一下，然后执行下面一句）
+			awk -F "|" '{print $1}' test.txt |sort -k 1 -n -r|uniq -c|awk -F " " '{print $2}' >> test_2.txt(获取到全部的新增loader的应用ID)
+		2.根据应用ID获取对应的userId
+		3.查询对应userId创建应用的数量
+		4.进行表关联，查询用户表，获取用户的信息
+
+
+	SELECT
+		userName,
+		loginName,
+		phone,
+		FROM_UNIXTIME(
+			TB_Enterprise_User.ct / 1000,
+			'%Y-%m-%d %H:%i:%S'
+		) AS ct,
+		province,
+		num
+	FROM 
+		TB_Enterprise_User
+	INNER JOIN (
+		SELECT
+			userId,COUNT(*) AS num
+		FROM
+			cad_app_user
+		WHERE
+			userId IN (
+				SELECT
+					userId
+				FROM
+					cad_app_user
+				WHERE
+					type = 0
+				AND appId IN('A6999979578606','A6999956860949','A6999909977189')
+				GROUP BY
+					userId
+			)
+		GROUP BY
+			userId
+	) tb1 ON TB_Enterprise_User.enterUserId = tb1.userId
+	ORDER BY
+		TB_Enterprise_User.enterUserId ASC;
