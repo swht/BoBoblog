@@ -106,3 +106,26 @@ Author:@南非波波
 	) tb1 ON TB_Enterprise_User.enterUserId = tb1.userId
 	ORDER BY
 		TB_Enterprise_User.enterUserId ASC;
+
+
+三、指定时间的自定义loader的使用用户
+	
+	SELECT
+		userName,
+		loginName,
+		phone,
+		FROM_UNIXTIME(
+			TB_Enterprise_User.ct / 1000,
+			'%Y-%m-%d %H:%i:%S'
+		) AS ct,
+		province
+	FROM
+		TB_Enterprise_User
+	INNER JOIN loader_pack ON TB_Enterprise_User.enterUserId = loader_pack.userId
+	WHERE
+		loader_pack.ct >= UNIX_TIMESTAMP('2016-10-17 00:00:00') * 1000
+	AND loader_pack.ct < UNIX_TIMESTAMP('2016-10-24 00:00:00') * 1000
+	GROUP BY enterUserId
+	ORDER BY
+		TB_Enterprise_User.enterUserId ASC;
+	
