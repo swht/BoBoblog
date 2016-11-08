@@ -129,3 +129,95 @@ Author:@南非波波
 	ORDER BY
 		TB_Enterprise_User.enterUserId ASC;
 	
+四、10月28号-11月8号访问课程页面“未买课程”的用户数据。需要信息：注册时间、手机号、邮箱、应用个数、最后登录时间
+
+	SELECT
+		userName,
+		loginName,
+		phone,
+		FROM_UNIXTIME(
+			TB_Enterprise_User.ct / 1000,
+			'%Y-%m-%d %H:%i:%S'
+		) AS ct,
+		FROM_UNIXTIME(
+			TB_Enterprise_User.loginTime / 1000,
+			'%Y-%m-%d %H:%i:%S'
+		) AS loginTime,
+		num,
+		MAX(vip_click.date) AS date
+	FROM
+		TB_Enterprise_User
+	INNER JOIN vip_click ON TB_Enterprise_User.enterUserId = vip_click.userId
+	INNER JOIN (
+		SELECT
+			userId,
+			COUNT(*) AS num
+		FROM
+			cad_app_user
+		WHERE
+			type = 0
+		GROUP BY
+			userId
+	) tb1 ON TB_Enterprise_User.enterUserId = tb1.userId
+	WHERE
+		UNIX_TIMESTAMP(vip_click.date) >= UNIX_TIMESTAMP('2016-10-28 00:00:00')
+	AND UNIX_TIMESTAMP(vip_click.date) < UNIX_TIMESTAMP('2016-11-09 00:00:00')
+	AND vip_click.url = '/vipservice/course'
+	AND vip_click.userId NOT IN (select userid from training_user GROUP BY userid)
+	GROUP BY
+		vip_click.userId
+	ORDER BY
+		vip_click.date ASC;	
+
+五、10月21号-11月8号注册的新用户“未访问过课程页面的用户”需要信息：注册时间、手机号、邮箱、最后登录时间
+
+	SELECT
+		userName,
+		loginName,
+		phone,
+		FROM_UNIXTIME(
+			TB_Enterprise_User.ct / 1000,
+			'%Y-%m-%d %H:%i:%S'
+		) AS ct,
+		FROM_UNIXTIME(
+			TB_Enterprise_User.loginTime / 1000,
+			'%Y-%m-%d %H:%i:%S'
+		) AS loginTime
+	FROM
+		TB_Enterprise_User
+	WHERE
+		UNIX_TIMESTAMP(ct) >= UNIX_TIMESTAMP('2016-10-28 00:00:00')
+	AND UNIX_TIMESTAMP(ct) < UNIX_TIMESTAMP('2016-11-09 00:00:00')
+	AND enterUserId NOT IN(select userId from vip_click GROUP BY
+		vip_click.userId)
+	ORDER BY
+		enterUserId ASC;
+
+六、点击公开直播课程按钮的用户信息
+
+	SELECT
+		userName,
+		loginName,
+		phone,
+		FROM_UNIXTIME(
+			TB_Enterprise_User.ct / 1000,
+			'%Y-%m-%d %H:%i:%S'
+		) AS ct,
+		num
+	FROM
+		TB_Enterprise_User
+	INNER JOIN (
+		SELECT
+			userId,
+			COUNT(*) AS num
+		FROM
+			cad_app_user
+		WHERE
+			type = 0
+		GROUP BY
+			userId
+	) tb1 ON TB_Enterprise_User.enterUserId = tb1.userId
+	where 
+		enterUserId in (select userid from vip_click where  url='openclass' and date >'2016-11-06')
+	ORDER BY
+		TB_Enterprise_User.enterUserId ASC;
