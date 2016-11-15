@@ -221,3 +221,119 @@ Author:@南非波波
 		enterUserId in (select userid from vip_click where  url='openclass' and date >'2016-11-06')
 	ORDER BY
 		TB_Enterprise_User.enterUserId ASC;
+
+七、获取指定城市注册用户的信息
+
+	SELECT
+		userName,
+		loginName,
+		phone,
+		FROM_UNIXTIME(
+			ct / 1000,
+			'%Y-%m-%d %H:%i:%S'
+		) AS ct,
+		FROM_UNIXTIME(
+			loginTime / 1000,
+			'%Y-%m-%d %H:%i:%S'
+		) AS loginTime,
+		province,
+		num
+	FROM
+		TB_Enterprise_User
+	INNER JOIN (
+		SELECT
+			userId,
+			COUNT(*) AS num
+		FROM
+			cad_app_user
+		WHERE
+			type = 0
+		GROUP BY
+			userId
+	) tb1 ON TB_Enterprise_User.enterUserId = tb1.userId
+	WHERE
+		state != 100
+	AND (
+		TB_Enterprise_User.province = '青岛'
+		OR TB_Enterprise_User.province = '潍坊'
+		OR TB_Enterprise_User.province = '济南'
+		OR TB_Enterprise_User.province = '淄博'
+	)
+	ORDER BY
+		loginTime ASC
+
+
+八、获取指定城市购买过七天培训课程的用户信息(运行库为CAD)
+	
+	SELECT
+		userName,
+		loginName,
+		phone,
+		FROM_UNIXTIME(
+			ct / 1000,
+			'%Y-%m-%d %H:%i:%S'
+		) AS ct,
+		FROM_UNIXTIME(
+			loginTime / 1000,
+			'%Y-%m-%d %H:%i:%S'
+		) AS loginTime,
+		province,
+		num
+	FROM
+		TB_Enterprise_User
+	INNER JOIN (
+		SELECT
+			userId,
+			COUNT(*) AS num
+		FROM
+			cad_app_user
+		WHERE
+			type = 0
+		GROUP BY
+			userId
+	) tb1 ON TB_Enterprise_User.enterUserId = tb1.userId
+	WHERE
+		state != 100
+	AND (
+		TB_Enterprise_User.province = '青岛'
+		OR TB_Enterprise_User.province = '潍坊'
+		OR TB_Enterprise_User.province = '济南'
+		OR TB_Enterprise_User.province = '淄博'
+	)
+	AND enterUserId IN (
+		SELECT
+			userid
+		FROM
+			training_user
+		GROUP BY
+			userid
+		UNION
+			SELECT
+				userid
+			FROM
+				admin2.tr_order
+			GROUP BY
+				userid
+	)
+	ORDER BY
+		loginTime ASC
+
+
+	===============================================================================
+	参考：http://www.cnblogs.com/kissdodog/archive/2013/06/24/3152743.html
+	使用了union关键字做查询结果的并集 
+		select * from table1
+		union [all]
+		select * from table2
+	#注意事项：两个表的查询结果数据结构要一致。另外如果使用 union all组合关键字，求并集的时候不会去掉重复行
+	===============================================================================
+	#延伸知识
+	#求交集
+		SELECT Name FROM Person_1
+		INTERSECT
+		SELECT Name FROM Person_2
+	#求差集
+		SELECT Name FROM Person_1
+		EXCEPT
+		SELECT Name FROM Person_2
+	===============================================================================
