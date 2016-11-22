@@ -337,3 +337,24 @@ Author:@南非波波
 		EXCEPT
 		SELECT Name FROM Person_2
 	===============================================================================
+
+九、获取指定时间的移动端未完全注册渠道来源用户	
+
+	SELECT
+		userName,
+		loginName,
+		phone,
+		FROM_UNIXTIME(
+			TB_Enterprise_User.ct / 1000,
+			'%Y-%m-%d %H:%i:%S'
+		) AS ctime,
+		channel
+	FROM
+		TB_Enterprise_User
+	WHERE
+		state = 10
+	AND ct >= UNIX_TIMESTAMP('2016-11-09 00:00:00') * 1000
+	AND ct < UNIX_TIMESTAMP('2016-11-23 00:00:00') * 1000
+	AND channelType=0
+	ORDER BY
+	ct ASC;
