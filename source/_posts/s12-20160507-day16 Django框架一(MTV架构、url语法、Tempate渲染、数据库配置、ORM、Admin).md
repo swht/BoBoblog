@@ -1,4 +1,4 @@
-﻿---
+---
 title: python自动化开发 day16
 date: 2016-05-07 15:30:00
 tags: Python开发之路
@@ -11,6 +11,8 @@ Author:@南非波波
 [http://www.cnblogs.com/alex3714/articles/5457672.html](http://www.cnblogs.com/alex3714/articles/5457672.html)
 
 ## 一、Django起步  ##
+
+![MTV模型](http://i.imgur.com/uHhXk5X.png)
 
 ### 1.创建Django项目 ###
 
